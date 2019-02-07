@@ -37,6 +37,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NSString *const kArchivedConversationsReuseIdentifier = @"kArchivedConversationsReuseIdentifier";
+
+#define SUBVIEW_ACCESSIBILITY_IDENTIFIER(_root_view, _variable_name)                                                   \
+    ([NSString stringWithFormat:@"%@.%@", _root_view.class, _variable_name])
+#define SET_SUBVIEW_ACCESSIBILITY_IDENTIFIER(_root_view, _variable_name)                                               \
+    _variable_name.accessibilityIdentifier = SUBVIEW_ACCESSIBILITY_IDENTIFIER(_root_view, (@ #_variable_name))
+
 typedef NS_ENUM(NSInteger, HomeViewMode) {
     HomeViewMode_Archive,
     HomeViewMode_Inbox,
@@ -58,8 +65,6 @@ typedef NS_ENUM(NSInteger, HomeViewControllerSection) {
     HomeViewControllerSectionConversations,
     HomeViewControllerSectionArchiveButton,
 };
-
-NSString *const kArchivedConversationsReuseIdentifier = @"kArchivedConversationsReuseIdentifier";
 
 @interface HomeViewController () <UITableViewDelegate,
     UITableViewDataSource,
@@ -1505,6 +1510,7 @@ NSString *const kArchivedConversationsReuseIdentifier = @"kArchivedConversations
                             value:Theme.secondaryColor
                             range:NSMakeRange(firstLine.length + 1, secondLine.length)];
     _emptyBoxLabel.attributedText = fullLabelString;
+    SET_SUBVIEW_ACCESSIBILITY_IDENTIFIER(self, _emptyBoxLabel);
 }
 
 // We want to delay asking for a review until an opportune time.
