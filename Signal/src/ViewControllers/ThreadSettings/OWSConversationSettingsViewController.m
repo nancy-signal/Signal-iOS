@@ -504,6 +504,8 @@ const CGFloat kIconViewLength = 24;
 
                                  cell.userInteractionEnabled = !strongSelf.hasLeftGroup;
 
+                                 switchView.accessibilityIdentifier = ACCESSIBILITY_IDENTIFIER_WITH_NAME(
+                                     OWSConversationSettingsViewController, @"disappearing_messages_switch");
                                  cell.accessibilityIdentifier = ACCESSIBILITY_IDENTIFIER_WITH_NAME(
                                      OWSConversationSettingsViewController, @"disappearing_messages");
 
@@ -555,6 +557,8 @@ const CGFloat kIconViewLength = 24;
 
                             cell.userInteractionEnabled = !strongSelf.hasLeftGroup;
 
+                            slider.accessibilityIdentifier = ACCESSIBILITY_IDENTIFIER_WITH_NAME(
+                                OWSConversationSettingsViewController, @"disappearing_messages_slider");
                             cell.accessibilityIdentifier = ACCESSIBILITY_IDENTIFIER_WITH_NAME(
                                 OWSConversationSettingsViewController, @"disappearing_messages_duration");
 
@@ -802,13 +806,14 @@ const CGFloat kIconViewLength = 24;
 
                                  cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-                                 UISwitch *blockConversationSwitch = [UISwitch new];
-                                 blockConversationSwitch.on =
-                                     [strongSelf.blockingManager isThreadBlocked:strongSelf.thread];
-                                 [blockConversationSwitch addTarget:strongSelf
-                                                             action:@selector(blockConversationSwitchDidChange:)
-                                                   forControlEvents:UIControlEventValueChanged];
-                                 cell.accessoryView = blockConversationSwitch;
+                                 UISwitch *switchView = [UISwitch new];
+                                 switchView.on = [strongSelf.blockingManager isThreadBlocked:strongSelf.thread];
+                                 [switchView addTarget:strongSelf
+                                                action:@selector(blockConversationSwitchDidChange:)
+                                      forControlEvents:UIControlEventValueChanged];
+                                 cell.accessoryView = switchView;
+                                 switchView.accessibilityIdentifier = ACCESSIBILITY_IDENTIFIER_WITH_NAME(
+                                     OWSConversationSettingsViewController, @"block_conversation_switch");
 
                                  return cell;
                              }
