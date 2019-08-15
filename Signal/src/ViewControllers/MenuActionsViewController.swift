@@ -22,6 +22,10 @@ public class MenuAction: NSObject {
         self.subtitle = subtitle
         self.accessibilityIdentifier = accessibilityIdentifier
         self.block = block
+
+        super.init()
+
+        self.accessibilityLabel = title
     }
 }
 
@@ -450,6 +454,7 @@ class MenuActionView: UIButton {
         self.isUserInteractionEnabled = false
 
         self.accessibilityIdentifier = action.accessibilityIdentifier
+        self.accessibilityLabel = action.accessibilityLabel
     }
 
     private var defaultBackgroundColor: UIColor {
