@@ -182,8 +182,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)removeAllObjectsInCollection
 {
     [[self dbReadWriteConnection] readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-        [transaction removeAllObjectsInCollection:[self collection]];
+        [self removeAllObjectsInCollectionWithTransaction:transaction];
     }];
+}
+
++ (void)removeAllObjectsInCollectionWithTransaction:(YapDatabaseReadWriteTransaction *)transaction
+{
+    [transaction removeAllObjectsInCollection:[self collection]];
 }
 
 + (nullable instancetype)fetchObjectWithUniqueID:(NSString *)uniqueID

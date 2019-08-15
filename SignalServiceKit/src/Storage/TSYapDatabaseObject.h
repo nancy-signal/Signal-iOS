@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Removes all objects in the classes collection.
  */
 + (void)removeAllObjectsInCollection;
++ (void)removeAllObjectsInCollectionWithTransaction:(YapDatabaseReadWriteTransaction *)transaction;
 
 /**
  * A memory intesive method to get all objects in the collection. You should prefer using enumeration over this method

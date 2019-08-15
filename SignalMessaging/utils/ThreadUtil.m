@@ -792,9 +792,10 @@ typedef void (^BuildOutgoingMessageCompletionBlock)(TSOutgoingMessage *savedMess
             [self removeAllObjectsInCollection:[TSAttachment collection]
                                          class:[TSAttachment class]
                                    transaction:transaction];
-            [self removeAllObjectsInCollection:[SignalRecipient collection]
-                                         class:[SignalRecipient class]
-                                   transaction:transaction];
+            // [SignalRecipient removeWithTransaction:] has an assert
+            // to prevent accidental usage, so we need to use
+            // removeAllObjectsInCollectionWithTransaction instead.
+            [SignalRecipient removeAllObjectsInCollectionWithTransaction:transaction];
         }];
     [TSAttachmentStream deleteAttachments];
 }
